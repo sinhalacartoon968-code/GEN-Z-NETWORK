@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartoons & Animated Series - GEN Z NETWORK</title>
+  <meta name="description" content="Stream and download legendary cartoons and animated series with Sinhala dubbing and subbing on GEN Z NETWORK." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8b5cf6',
+              pink: '#ec4899',
+              cyan: '#06b6d4',
+              dark: '#090a10',
+              card: '#111422'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="bg-[#090a10] text-gray-100 min-h-screen flex flex-col selection:bg-purple-600 selection:text-white">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 px-4 sm:px-8 border-b border-white/5 bg-[#090a10]/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-cyan-400 p-[2px] shadow-lg shadow-purple-600/30 group-hover:scale-105 transition transform">
+          <div class="w-full h-full bg-[#090a10] rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-bolt-lightning text-transparent bg-clip-text bg-gradient-to-tr from-purple-400 to-pink-500 text-lg"></i>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-syne text-xl sm:text-2xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">GEN Z<span class="text-white text-base sm:text-lg ml-1 font-semibold">NETWORK</span></span>
+          <span class="text-[9px] text-gray-400 font-semibold tracking-widest uppercase">Cartoons & Movies Hub</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-1.5 lg:gap-2">
+        <a href="index.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-house mr-1 text-purple-400"></i> Home
+        </a>
+        <a href="cartoons.html" class="px-4 py-2 rounded-xl text-sm font-bold text-white bg-white/10 shadow-sm border border-white/10 transition">
+          <i class="fa-solid fa-ghost mr-1 text-pink-400"></i> Cartoons
+        </a>
+        <a href="movies.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-film mr-1 text-cyan-400"></i> Movies
+        </a>
+        <a href="upload.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-cloud-arrow-up mr-1 text-amber-400"></i> Upload Studio
+        </a>
+        <a href="watchlist.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition relative">
+          <i class="fa-solid fa-bookmark mr-1 text-purple-400"></i> Watchlist
+          <span class="watchlist-count hidden ml-1.5 px-2 py-0.5 text-[10px] font-black rounded-full bg-pink-600 text-white shadow-sm">0</span>
+        </a>
+      </div>
+
+      <!-- Search & Right CTAs -->
+      <div class="flex items-center gap-3">
+        <div class="relative hidden sm:block w-48 md:w-64">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+            <input type="text" id="global-search-input" placeholder="Search cartoons..." autocomplete="off" class="w-full pl-9 pr-4 py-2 bg-gray-900/90 border border-gray-700/60 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500" />
+          </div>
+          <div id="search-results-dropdown" class="hidden absolute top-full left-0 right-0 mt-2 glass-panel rounded-2xl shadow-2xl overflow-hidden border border-purple-900/50 z-50"></div>
+        </div>
+
+        <a href="upload.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs shadow-lg shadow-purple-600/30 transition">
+          <i class="fa-solid fa-plus text-xs"></i> Upload
+        </a>
+
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-gray-900 text-gray-300 hover:text-white border border-gray-800 focus:outline-none">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-gray-800/80 flex flex-col gap-2">
+      <a href="index.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300">Home</a>
+      <a href="cartoons.html" class="px-4 py-2.5 rounded-xl text-sm font-bold bg-white/10 text-white">Cartoons</a>
+      <a href="movies.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300">Movies</a>
+      <a href="upload.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300">Upload Studio</a>
+      <a href="watchlist.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300">Watchlist</a>
+    </div>
+  </nav>
+
+  <!-- ================= CARTOON HEADER ================= -->
+  <header class="pt-28 pb-8 px-4 sm:px-8 border-b border-gray-800/40 bg-gradient-to-b from-[#121024] to-[#090a10]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-pink-500/20 text-pink-400 border border-pink-500/30">
+            <i class="fa-solid fa-ghost mr-1"></i> Animation Universe
+          </span>
+          <span class="text-xs text-gray-400" id="cartoons-count-pill">Showing Cartoons</span>
+        </div>
+        <h1 class="font-syne text-3xl sm:text-5xl font-black text-white">
+          Cartoons & <span class="gradient-text">Animated Series</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">
+          Relive childhood Cartoon Network legends, modern CGI masterpieces, Anime sagas, and Sinhala dubbed favorites.
+        </p>
+      </div>
+
+      <!-- Quick in-page Search & Sort -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="relative">
+          <i class="fa-solid fa-filter absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+          <select id="sort-select" class="pl-8 pr-8 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-xs text-gray-200 font-medium focus:outline-none focus:border-purple-500 cursor-pointer">
+            <option value="featured">Sort by: Featured</option>
+            <option value="rating">Highest Rating (IMDb)</option>
+            <option value="year">Newest First</option>
+            <option value="title">Title (A - Z)</option>
+          </select>
+        </div>
+
+        <a href="upload.html" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-purple-600/20 transition">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Upload Cartoon
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= FILTER PILLS ================= -->
+  <section class="py-4 border-b border-gray-800/40 bg-gray-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+      <button class="genre-filter-btn active px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-purple-600 text-white transition" data-genre="all">
+        All Genres
+      </button>
+      <button class="genre-filter-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-genre="Action">
+        ⚡ Action
+      </button>
+      <button class="genre-filter-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-genre="Adventure">
+        🧭 Adventure
+      </button>
+      <button class="genre-filter-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-genre="Comedy">
+        😂 Comedy
+      </button>
+      <button class="genre-filter-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-genre="Sci-Fi">
+        🚀 Sci-Fi
+      </button>
+      <button class="genre-filter-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-genre="Sinhala Dub">
+        🇱🇰 Sinhala Dub
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= CARTOON CARDS GRID ================= -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-8 py-10 w-full">
+    <div id="cartoons-catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+      <!-- Populated via JavaScript -->
+    </div>
+  </main>
+
+  <!-- ================= TRAILER MODAL ================= -->
+  <div id="trailer-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md items-center justify-center p-4">
+    <div class="relative w-full max-w-4xl bg-gray-950 rounded-3xl overflow-hidden border border-purple-500/30 shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-gray-800">
+        <h4 id="trailer-modal-title" class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-film text-pink-500"></i> Official Trailer
+        </h4>
+        <button id="close-trailer-btn" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="relative w-full aspect-video bg-black">
+        <iframe id="trailer-iframe" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="mt-20 border-t border-gray-800/80 bg-[#06070b] py-12 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-syne text-sm font-bold text-white">GEN Z NETWORK</span>
+        <span>• Cartoon & Anime Streaming Hub</span>
+      </div>
+      <p>&copy; 2026 GEN Z NETWORK. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('cartoons-catalog-grid');
+      const countPill = document.getElementById('cartoons-count-pill');
+      const sortSelect = document.getElementById('sort-select');
+      const genreBtns = document.querySelectorAll('.genre-filter-btn');
+
+      let currentGenre = 'all';
+
+      function renderCartoons() {
+        let cartoons = ContentDB.getCartoons();
+
+        // Filter by genre
+        if (currentGenre !== 'all') {
+          if (currentGenre === 'Sinhala Dub') {
+            cartoons = cartoons.filter(c => c.dubSub && c.dubSub.includes('Dub'));
+          } else {
+            cartoons = cartoons.filter(c => c.genre && c.genre.includes(currentGenre));
+          }
+        }
+
+        // Sort
+        const sortVal = sortSelect.value;
+        if (sortVal === 'rating') {
+          cartoons.sort((a, b) => b.rating - a.rating);
+        } else if (sortVal === 'year') {
+          cartoons.sort((a, b) => b.year - a.year);
+        } else if (sortVal === 'title') {
+          cartoons.sort((a, b) => a.title.localeCompare(b.title));
+        }
+
+        if (countPill) {
+          countPill.textContent = `Showing ${cartoons.length} Cartoons`;
+        }
+
+        if (cartoons.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-full py-16 text-center text-gray-400">
+              <i class="fa-solid fa-ghost text-4xl mb-3 text-purple-500"></i>
+              <h3 class="text-base font-bold text-white">No cartoons found for this filter</h3>
+              <p class="text-xs text-gray-400 mt-1">Try switching to another genre or upload a new one!</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = cartoons.map(item => createCardHTML(item)).join('');
+      }
+
+      genreBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          genreBtns.forEach(b => {
+            b.classList.remove('active', 'bg-purple-600', 'text-white');
+            b.classList.add('bg-gray-900', 'text-gray-300');
+          });
+          btn.classList.add('active', 'bg-purple-600', 'text-white');
+          btn.classList.remove('bg-gray-900', 'text-gray-300');
+
+          currentGenre = btn.dataset.genre;
+          renderCartoons();
+        });
+      });
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', renderCartoons);
+      }
+
+      renderCartoons();
+    });
+  </script>
+</body>
+</html>

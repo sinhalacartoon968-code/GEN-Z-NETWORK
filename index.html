@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEN Z NETWORK - Watch & Upload Cartoons & Movies</title>
+  <meta name="description" content="GEN Z NETWORK is the ultimate hub for streaming cartoons, animated movies, dual-audio and Sinhala dubbed releases with 4K downloads." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8b5cf6',
+              pink: '#ec4899',
+              cyan: '#06b6d4',
+              dark: '#090a10',
+              card: '#111422'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="bg-[#090a10] text-gray-100 min-h-screen flex flex-col selection:bg-purple-600 selection:text-white">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 px-4 sm:px-8 border-b border-white/5 bg-[#090a10]/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-cyan-400 p-[2px] shadow-lg shadow-purple-600/30 group-hover:scale-105 transition transform">
+          <div class="w-full h-full bg-[#090a10] rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-bolt-lightning text-transparent bg-clip-text bg-gradient-to-tr from-purple-400 to-pink-500 text-lg"></i>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-syne text-xl sm:text-2xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">GEN Z<span class="text-white text-base sm:text-lg ml-1 font-semibold">NETWORK</span></span>
+          <span class="text-[9px] text-gray-400 font-semibold tracking-widest uppercase">Cartoons & Movies Hub</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-1.5 lg:gap-2">
+        <a href="index.html" class="px-4 py-2 rounded-xl text-sm font-bold text-white bg-white/10 shadow-sm border border-white/10 transition">
+          <i class="fa-solid fa-house mr-1 text-purple-400"></i> Home
+        </a>
+        <a href="cartoons.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-ghost mr-1 text-pink-400"></i> Cartoons
+        </a>
+        <a href="movies.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-film mr-1 text-cyan-400"></i> Movies
+        </a>
+        <a href="upload.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition">
+          <i class="fa-solid fa-cloud-arrow-up mr-1 text-amber-400"></i> Upload Studio
+        </a>
+        <a href="watchlist.html" class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition relative">
+          <i class="fa-solid fa-bookmark mr-1 text-purple-400"></i> Watchlist
+          <span class="watchlist-count hidden ml-1.5 px-2 py-0.5 text-[10px] font-black rounded-full bg-pink-600 text-white shadow-sm">0</span>
+        </a>
+      </div>
+
+      <!-- Search & Right CTAs -->
+      <div class="flex items-center gap-3">
+        <!-- Live Search Bar -->
+        <div class="relative hidden sm:block w-48 md:w-64">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+            <input type="text" id="global-search-input" placeholder="Search cartoons, movies..." autocomplete="off" class="w-full pl-9 pr-4 py-2 bg-gray-900/90 border border-gray-700/60 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition shadow-inner" />
+          </div>
+          <!-- Dropdown search results -->
+          <div id="search-results-dropdown" class="hidden absolute top-full left-0 right-0 mt-2 glass-panel rounded-2xl shadow-2xl overflow-hidden border border-purple-900/50 z-50"></div>
+        </div>
+
+        <!-- Upload Button -->
+        <a href="upload.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs shadow-lg shadow-purple-600/30 transition transform hover:scale-[1.03]">
+          <i class="fa-solid fa-plus text-xs"></i> Upload
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-gray-900 text-gray-300 hover:text-white border border-gray-800 focus:outline-none">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-gray-800/80 flex flex-col gap-2">
+      <div class="relative mb-2">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+        <input type="text" oninput="document.getElementById('global-search-input').value = this.value; document.getElementById('global-search-input').dispatchEvent(new Event('input'))" placeholder="Search title..." class="w-full pl-9 pr-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500" />
+      </div>
+      <a href="index.html" class="px-4 py-2.5 rounded-xl text-sm font-bold bg-white/10 text-white flex items-center justify-between">
+        <span><i class="fa-solid fa-house mr-2 text-purple-400"></i> Home</span>
+        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+      </a>
+      <a href="cartoons.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 flex items-center justify-between">
+        <span><i class="fa-solid fa-ghost mr-2 text-pink-400"></i> Cartoons</span>
+        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+      </a>
+      <a href="movies.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 flex items-center justify-between">
+        <span><i class="fa-solid fa-film mr-2 text-cyan-400"></i> Movies</span>
+        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+      </a>
+      <a href="upload.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 flex items-center justify-between">
+        <span><i class="fa-solid fa-cloud-arrow-up mr-2 text-amber-400"></i> Upload Studio</span>
+        <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">New</span>
+      </a>
+      <a href="watchlist.html" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 flex items-center justify-between">
+        <span><i class="fa-solid fa-bookmark mr-2 text-purple-400"></i> Watchlist</span>
+        <span class="watchlist-count hidden px-2 py-0.5 text-[10px] font-bold rounded-full bg-pink-600 text-white">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <header class="relative pt-24 sm:pt-28 pb-14 overflow-hidden border-b border-gray-800/60">
+    <!-- Ambient Neon Background Blobs -->
+    <div class="absolute -top-32 left-1/4 w-96 h-96 bg-purple-600/25 rounded-full blur-[130px] pointer-events-none"></div>
+    <div class="absolute top-20 right-10 w-96 h-96 bg-pink-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-80 h-80 bg-cyan-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+      
+      <!-- Featured Hero Banner Box -->
+      <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-gradient-to-r from-gray-950 via-[#0d1020] to-gray-950">
+        <!-- Backdrop Image with overlay -->
+        <div class="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1600&auto=format&fit=crop&q=80" alt="Featured Backdrop" class="w-full h-full object-cover object-top opacity-35 filter brightness-75 scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#090a10] via-[#090a10]/80 to-transparent"></div>
+        </div>
+
+        <!-- Banner Content -->
+        <div class="relative z-10 p-6 sm:p-10 md:p-14 lg:w-2/3 flex flex-col justify-center min-h-[460px]">
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg">
+              <i class="fa-solid fa-fire mr-1 text-amber-300"></i> #1 Spotlight
+            </span>
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold uppercase bg-black/70 text-cyan-400 border border-cyan-500/40 backdrop-blur-md">
+              🇱🇰 Sinhala Sub + Dual Audio
+            </span>
+            <span class="px-2 py-0.5 rounded-md text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <i class="fa-solid fa-star text-[10px] mr-1"></i> 8.9 / 10
+            </span>
+            <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-white/10 text-gray-300">
+              4K Ultra HD
+            </span>
+          </div>
+
+          <h1 class="font-syne text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 drop-shadow-md">
+            Spider-Man: Across the <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Spider-Verse</span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-gray-300 mb-6 line-clamp-3 leading-relaxed max-w-2xl">
+            Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence. Watch in pristine 4K HDR with Sinhala Subtitles and crystal clear audio!
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            <a href="watch.html?id=spiderman-spiderverse" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-purple-600/30 flex items-center gap-2.5 transform hover:scale-105 transition">
+              <i class="fa-solid fa-play text-lg"></i> Watch Now
+            </a>
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/cqGjhVJWtEg', 'Spider-Man: Across the Spider-Verse')" class="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-sm backdrop-blur-md flex items-center gap-2 transform hover:scale-105 transition">
+              <i class="fa-solid fa-film text-purple-400"></i> Watch Trailer
+            </button>
+            <button onclick="handleWatchlistToggle(event, 'spiderman-spiderverse')" data-bookmark-id="spiderman-spiderverse" class="p-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white backdrop-blur-md transition hover:scale-105" title="Add to Watchlist">
+              <i class="fa-regular fa-bookmark text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= GENRE & CATEGORY TABS ================= -->
+  <section class="py-6 border-b border-gray-800/40 bg-gray-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar">
+        <button class="filter-tab-btn active px-5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg" data-filter="all">
+          <i class="fa-solid fa-fire mr-1.5"></i> All Releases
+        </button>
+        <button class="filter-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-filter="cartoon">
+          <i class="fa-solid fa-ghost mr-1.5 text-pink-400"></i> Top Cartoons
+        </button>
+        <button class="filter-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-filter="movie">
+          <i class="fa-solid fa-clapperboard mr-1.5 text-cyan-400"></i> Animated Movies
+        </button>
+        <button class="filter-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-filter="dub">
+          <i class="fa-solid fa-language mr-1.5 text-amber-400"></i> Sinhala Dubbed
+        </button>
+        <button class="filter-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition" data-filter="anime">
+          <i class="fa-solid fa-dragon mr-1.5 text-emerald-400"></i> Anime Series
+        </button>
+        <a href="upload.html" class="ml-auto px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-700/50 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-cloud-arrow-up text-pink-400"></i> Creator Upload Hub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRENDING NOW GRID ================= -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-8 py-10 w-full">
+    
+    <!-- Section Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-pink-400">Fresh Drops</span>
+        </div>
+        <h2 class="font-syne text-2xl sm:text-3xl font-black text-white">Trending on <span class="gradient-text">GEN Z NETWORK</span></h2>
+      </div>
+      <a href="cartoons.html" class="text-xs font-bold text-purple-400 hover:text-pink-400 flex items-center gap-1.5 transition">
+        View All <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Dynamic Items Grid -->
+    <div id="home-trending-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+      <!-- Populated via JavaScript -->
+    </div>
+
+    <!-- ================= MUST-WATCH CARTOONS SECTION ================= -->
+    <div class="mt-16">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Non-Stop Entertainment</span>
+          <h2 class="font-syne text-2xl sm:text-3xl font-black text-white">Legendary Cartoons & Shows</h2>
+        </div>
+        <a href="cartoons.html" class="text-xs font-bold text-purple-400 hover:text-pink-400 flex items-center gap-1.5 transition">
+          Browse Cartoons <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div id="home-cartoons-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+        <!-- Populated via JavaScript -->
+      </div>
+    </div>
+
+    <!-- ================= BLOCKBUSTER MOVIES SECTION ================= -->
+    <div class="mt-16">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Cinematic Marvels</span>
+          <h2 class="font-syne text-2xl sm:text-3xl font-black text-white">4K Blockbuster Animated Movies</h2>
+        </div>
+        <a href="movies.html" class="text-xs font-bold text-purple-400 hover:text-pink-400 flex items-center gap-1.5 transition">
+          Browse Movies <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div id="home-movies-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+        <!-- Populated via JavaScript -->
+      </div>
+    </div>
+
+    <!-- ================= UPLOAD PROMO BANNER ================= -->
+    <section class="mt-20 relative rounded-3xl overflow-hidden p-8 sm:p-12 border border-purple-500/20 bg-gradient-to-r from-purple-950/60 via-gray-900 to-pink-950/50">
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="relative z-10 max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-bold mb-4">
+          <i class="fa-solid fa-video text-pink-400"></i> Join the Creator Movement
+        </div>
+        <h3 class="font-syne text-2xl sm:text-4xl font-extrabold text-white mb-3 leading-tight">
+          Got Favorite Cartoons or Movies? <span class="gradient-text">Upload & Share Them!</span>
+        </h3>
+        <p class="text-gray-300 text-sm sm:text-base mb-6 leading-relaxed">
+          Upload cartoon series episodes, animated features, Sinhala subtitles or dub tracks directly through our client-side Creator Studio. Instant preview and stored right on your browser!
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="upload.html" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-sm shadow-xl shadow-purple-600/30 flex items-center gap-2 transform hover:scale-105 transition">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Launch Upload Studio
+          </a>
+          <a href="watchlist.html" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/15 transition">
+            <i class="fa-solid fa-bookmark mr-1.5 text-purple-400"></i> View Your Watchlist
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES BADGES ================= -->
+    <section class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">Ultra Fast Streaming</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">High performance CDN servers for buffer-free playback on all devices.</p>
+        </div>
+      </div>
+
+      <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+          <i class="fa-solid fa-closed-captioning"></i>
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">Sinhala Sub & Dub</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Sri Lankan Gen Z curated cartoons and movies with Sinhala subtitles & dubbing.</p>
+        </div>
+      </div>
+
+      <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+          <i class="fa-solid fa-download"></i>
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">Direct 4K Downloads</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Grab episodes in 480p, 720p, 1080p, or 4K with single-click direct links.</p>
+        </div>
+      </div>
+
+      <div class="glass-panel p-6 rounded-2xl flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">Clean & Ad-Free</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Enjoy smooth navigation without annoying popups or redirects.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= TRAILER MODAL ================= -->
+  <div id="trailer-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md items-center justify-center p-4">
+    <div class="relative w-full max-w-4xl bg-gray-950 rounded-3xl overflow-hidden border border-purple-500/30 shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-gray-800">
+        <h4 id="trailer-modal-title" class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-film text-pink-500"></i> Official Trailer
+        </h4>
+        <button id="close-trailer-btn" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="relative w-full aspect-video bg-black">
+        <iframe id="trailer-iframe" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="mt-20 border-t border-gray-800/80 bg-[#06070b] py-12 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-1">
+        <a href="index.html" class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white font-bold">
+            <i class="fa-solid fa-bolt-lightning text-sm"></i>
+          </div>
+          <span class="font-syne text-xl font-black text-white">GEN Z <span class="text-purple-400">NETWORK</span></span>
+        </a>
+        <p class="text-xs text-gray-400 leading-relaxed mb-4">
+          The next-generation entertainment network for Gen Z anime, cartoons, and animated movies with Sinhala subtitles and dubbing.
+        </p>
+        <div class="flex items-center gap-3">
+          <a href="#" class="w-8 h-8 rounded-lg bg-gray-900 hover:bg-purple-600 text-gray-400 hover:text-white flex items-center justify-center transition"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-gray-900 hover:bg-pink-600 text-gray-400 hover:text-white flex items-center justify-center transition"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-gray-900 hover:bg-cyan-600 text-gray-400 hover:text-white flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-gray-900 hover:bg-amber-600 text-gray-400 hover:text-white flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h5 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Quick Navigation</h5>
+        <ul class="space-y-2 text-xs text-gray-400 font-medium">
+          <li><a href="index.html" class="hover:text-purple-400 transition">Home Spotlight</a></li>
+          <li><a href="cartoons.html" class="hover:text-purple-400 transition">Cartoons Collection</a></li>
+          <li><a href="movies.html" class="hover:text-purple-400 transition">Blockbuster Movies</a></li>
+          <li><a href="upload.html" class="hover:text-purple-400 transition">Upload & Share Studio</a></li>
+          <li><a href="watchlist.html" class="hover:text-purple-400 transition">Your Watchlist</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h5 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Popular Genres</h5>
+        <ul class="space-y-2 text-xs text-gray-400 font-medium">
+          <li><a href="cartoons.html" class="hover:text-pink-400 transition">Action & Adventure</a></li>
+          <li><a href="cartoons.html" class="hover:text-pink-400 transition">Comedy & Fun</a></li>
+          <li><a href="movies.html" class="hover:text-pink-400 transition">Sci-Fi & Cyberpunk</a></li>
+          <li><a href="cartoons.html" class="hover:text-pink-400 transition">Cartoon Network Classics</a></li>
+          <li><a href="movies.html" class="hover:text-pink-400 transition">Sinhala Subbed Releases</a></li>
+        </ul>
+      </div>
+
+      <!-- Community & Notice -->
+      <div>
+        <h5 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Gen Z Community</h5>
+        <p class="text-xs text-gray-400 leading-relaxed mb-3">
+          Join 25,000+ animation fans across Sri Lanka and worldwide. Upload cartoons or request your favorite nostalgia shows.
+        </p>
+        <a href="upload.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600/30 text-purple-300 border border-purple-500/40 text-xs font-bold hover:bg-purple-600 hover:text-white transition">
+          <i class="fa-solid fa-plus text-xs"></i> Post Your Upload
+        </a>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-3">
+      <p>&copy; 2026 GEN Z NETWORK. Built with HTML, CSS, JavaScript & Tailwind CSS.</p>
+      <p class="flex items-center gap-1">Made with <i class="fa-solid fa-heart text-pink-500 text-[10px]"></i> for All Animation & Movie Lovers</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Home Page Specific Rendering
+    document.addEventListener('DOMContentLoaded', () => {
+      const allItems = ContentDB.getAll();
+      const trendingContainer = document.getElementById('home-trending-grid');
+      const cartoonsContainer = document.getElementById('home-cartoons-grid');
+      const moviesContainer = document.getElementById('home-movies-grid');
+
+      // Populate Trending (Top 6)
+      if (trendingContainer) {
+        trendingContainer.innerHTML = allItems.slice(0, 6).map(item => createCardHTML(item)).join('');
+      }
+
+      // Populate Cartoons (6)
+      if (cartoonsContainer) {
+        const cartoons = ContentDB.getCartoons();
+        cartoonsContainer.innerHTML = cartoons.slice(0, 6).map(item => createCardHTML(item)).join('');
+      }
+
+      // Populate Movies (6)
+      if (moviesContainer) {
+        const movies = ContentDB.getMovies();
+        moviesContainer.innerHTML = movies.slice(0, 6).map(item => createCardHTML(item)).join('');
+      }
+
+      // Filter tabs logic
+      const filterBtns = document.querySelectorAll('.filter-tab-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'text-white');
+            b.classList.add('bg-gray-900', 'text-gray-300');
+          });
+          btn.classList.add('active', 'bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'text-white');
+          btn.classList.remove('bg-gray-900', 'text-gray-300');
+
+          const filter = btn.dataset.filter;
+          let filtered = allItems;
+          if (filter === 'cartoon') filtered = allItems.filter(i => i.type === 'cartoon');
+          else if (filter === 'movie') filtered = allItems.filter(i => i.type === 'movie');
+          else if (filter === 'dub') filtered = allItems.filter(i => i.dubSub && i.dubSub.toLowerCase().includes('dub'));
+          else if (filter === 'anime') filtered = allItems.filter(i => i.category === 'Anime' || (i.genre && i.genre.includes('Anime')));
+
+          if (trendingContainer) {
+            trendingContainer.innerHTML = filtered.slice(0, 6).map(item => createCardHTML(item)).join('');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
